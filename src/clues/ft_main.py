@@ -126,7 +126,7 @@ def parse_cmd_line_params():
     parser.add_argument(
         "--num_problematic_subgroups",
         help="Number of problematic subgroups to be used for mitigation",
-        default=50,
+        default=-1,
         type=int,
         required=False)
     parser.add_argument(
