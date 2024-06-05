@@ -1,6 +1,6 @@
 # CLUES
 
-This repo contains the code for the paper "A Contrastive Learning Approach to Mitigate Bias in Speech Models", submitted at InterSpeech 2024.
+This repo contains the code for the paper "A Contrastive Learning Approach to Mitigate Bias in Speech Models", accepted at InterSpeech 2024.
 
 In this repository, you will find the code to replicate our experiments.  
 We do not include the datasets used in the paper as they are publicly available: [FSC](https://fluent.ai/fluent-speech-commands-a-dataset-for-spoken-language-understanding-research/) and [ITALIC](https://huggingface.co/datasets/RiTA-nlp/ITALIC).
@@ -13,12 +13,13 @@ We evaluate our approach on two publicly available datasets: Fluent Speech Comma
 The ITALIC dataset consists of 16,521 audio samples recorded by 70 speakers. Each utterance is annotated with two slots (action and scenario), and the intent is derived from their combination. We use the "Speaker" configuration, wherein the speakers do not overlap in the train, validation, and test splits.
 
 ### Metadata
-For the above datasets we consider the following metadata when using DivExplorer for automatically extract subgroups: (i) demographic metadata describing the speaker (e.g., gender, age, language fluency level), (ii) factors related to speaking and recording conditions (e.g., duration of silences, number of words, speaking rate, and noise level), and (iii) intents represented as combinations of action, object, and location for FSC, or action and scenario for ITALIC.  
+For the above datasets, we consider the following metadata when using DivExplorer to automatically extract subgroups: (i) demographic metadata describing the speaker (e.g., gender, age, language fluency level), (ii) factors related to speaking and recording conditions (e.g., duration of silences, number of words, speaking rate, and noise level), and (iii) intents represented as combinations of action, object, and location for FSC, or action and scenario for ITALIC.  
 We discretize continuous metadata using frequency-based discretization into three distinct ranges, labeled as "low", "medium", and "high". 
 Hence, continuous values are categorized into discrete bins based on their respective frequencies within the dataset. In the experiments, we explore all subgroups with a minimum frequency $s$ of $0.03$.
 
 ### Models
-We fine-tune the transformer-based wav2vec 2.0 base (ca. 90M parameters) and multilingual XLSR (ca. 300M parameters) models, on the FSC and the ITALIC dataset, respectively. The pre-trained checkpoints of these models are obtained from the [Hugging Face hub](https://huggingface.co/models). We trained the models for $2800$ steps for FSC and $5100$ for ITALIC, with a batch size of 32, using the AdamW optimizer with a learning rate of $10^{-4}$, and $500$ warmup steps.
+We fine-tune the transformer-based wav2vec 2.0 base (ca. 90M parameters) and multilingual XLSR (ca. 300M parameters) models on the FSC and the ITALIC dataset, respectively. The pre-trained checkpoints of these models are obtained from the [Hugging Face hub](https://huggingface.co/models). We trained the models for $2800$ steps for FSC and $5100$ for ITALIC, using the AdamW optimizer with a learning rate of $10^{-4}$, and $500$ warmup steps. 
+By using the multi-similarity loss, we adhere to standard procedures in contrastive learning, selecting positive and negative sample pairs within each batch to optimize model performance. We set the batch size to 32 to ensure consistency and comparability across our analyses. 
 
 ### Losses
 We introduced three complementary multi-similarity contrastive loss functions targeting different scopes: task, subgroup, and error.
