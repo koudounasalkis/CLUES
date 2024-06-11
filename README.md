@@ -1,6 +1,9 @@
 # CLUES
 
-This repo contains the code for the paper "A Contrastive Learning Approach to Mitigate Bias in Speech Models", accepted at InterSpeech 2024.
+[![License](https://img.shields.io/badge/License-Apache%202.0-red.svg)](LICENSE) 
+[![Paper](https://img.shields.io/badge/Paper-Interspeech%202024-blue)](https://www.interspeech2024.org/)
+
+This repo contains the code for the paper "A Contrastive Learning Approach to Mitigate Bias in Speech Models", accepted at Interspeech 2024.
 
 In this repository, you will find the code to replicate our experiments.  
 We do not include the datasets used in the paper as they are publicly available: [FSC](https://fluent.ai/fluent-speech-commands-a-dataset-for-spoken-language-understanding-research/) and [ITALIC](https://huggingface.co/datasets/RiTA-nlp/ITALIC).
